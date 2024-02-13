@@ -1,0 +1,117 @@
+﻿@page "/bikes"
+@attribute [StreamRendering]
+
+<PageTitle>Bikes</PageTitle>
+
+
+<h1>Bikes</h1>
+
+
+
+@if (bikesStation == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>number</th>
+                <th>contract_name</th>
+                <th>name</th>
+                <th>address</th>
+                <th>banking</th>
+                <th>bonus</th>
+                <th>bike_stand</th>
+                <th>available_bike_stands</th>
+                <th>available_bikes</th>
+                <th>status</th>
+                <th>last_update</th>
+                <th>   </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var bike in bikesStation)
+            {
+                <tr>
+                    <td>@bike.number </td>
+                    <td>@bike.contract_name </td>
+                    <td>@bike.name </td>
+                    <td>@bike.address </td>
+                    <td>@bike.banking </td>
+                    <td input type="checkbox" name="bonus" > </td>
+                    <td>@bike.bike_stands </td>
+                    <td>@bike.available_bike_stands </td>
+                    <td>@bike.available_bikes </td>
+                    <td>@bike.status </td>
+                    <td>@bike.last_update </td>
+
+                    <td>
+                        <NavLink class="nav-link" href="detail" >
+                             Details
+                        </NavLink>
+                    </td>
+                    
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+
+@code {
+
+
+    private BikeStation[]? bikesStation;
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Simulate asynchronous loading to demonstrate streaming rendering
+        await Task.Delay(500);
+
+        var summa = new[] {"North", "West","Est","Sudi","Sunny","Sony","Cloudy","Hot","Gouspy","Seibel","Difac","Gross","Fabre","Caze"};
+        var summaries = new[] { "Paul","Ryan", "Jon", "Sylvain", "Mathis", "Karl", "Roxane", "Julie", "Elodie", "Marie", "Jack","Jimmy","Kyllian" };
+        var op = new[] { "OPEN", "CLOSE" };
+        bikesStation = Enumerable.Range(1, 10).Select(index => new BikeStation
+            {
+                number = Random.Shared.Next(0, 155),
+                contract_name = "dublin",
+                name = summaries[Random.Shared.Next(summaries.Length)]+" "+summa[Random.Shared.Next(summa.Length)],
+                address = "",
+                banking = Random.Shared.Next(0,2)==0,
+                bonus = Random.Shared.Next(0, 2) == 0,
+                bike_stands = Random.Shared.Next(0, 50),
+                available_bike_stands = Random.Shared.Next(0, 30),
+                available_bikes = Random.Shared.Next(0, 30),
+                status =op[ Random.Shared.Next(op.Length)],
+                last_update = Random.Shared.Next(100000000, 179000000),
+                //Summary = summaries[Random.Shared.Next(summaries.Length)]
+            }).ToArray();
+    }
+
+
+    public class BikeStation
+    {
+        public int number { get; set; }
+        public string contract_name { get; set; }
+        public string name { get; set; }
+        public string address { get; set; }
+        public Position position { get; set; }
+        public bool banking { get; set; }
+        public bool bonus { get; set; }
+        public int bike_stands { get; set; }
+        public int available_bike_stands { get; set; }
+        public int available_bikes { get; set; }
+        public string status { get; set; }
+        public long last_update { get; set; }
+    }
+
+
+    public class Position
+    {
+        public float lat { get; set; }
+        public float lng { get; set; }
+    }
+}

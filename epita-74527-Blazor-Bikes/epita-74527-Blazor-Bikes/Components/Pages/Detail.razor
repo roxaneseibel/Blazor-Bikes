@@ -1,0 +1,41 @@
+﻿@page "/detail"
+@attribute [StreamRendering]
+
+
+<h1>Details</h1>
+<h2>BikeStation</h2>
+<h2>__________________________________________________</h2>
+
+<p>
+
+	<strong>BikeStation</strong> 42
+</p>
+<p>
+	<strong>contract_name</strong> dublin
+</p>
+<p>
+	<strong>name</strong> YOUR NAME
+</p>
+<p>
+	<strong>address</strong> i don't now
+</p>
+<p>
+	<strong>bike_stands</strong> 2
+</p>
+<p>
+	<strong>available_bike_stands</strong> 30
+</p>
+<p>
+	<strong>available_bikes</strong> 4
+</p>
+
+
+<NavLink class="nav-link" href="bikes">
+	Back
+</NavLink>
+
+
+@code {
+	private Bikes.BikeStation bikeStation;
+
+}
