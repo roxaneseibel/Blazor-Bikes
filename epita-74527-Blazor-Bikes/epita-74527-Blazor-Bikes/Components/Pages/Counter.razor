@@ -5,15 +5,52 @@
 
 <h1>Counter</h1>
 
-<p role="status">Current count: @currentCount</p>
+<p role="status">Current count 1: @currentCount</p>
+<button class="btn btn-primary" @onclick="DecrementCount1">- Minus</button>
+<button class="btn btn-primary" @onclick="IncrementCount1">+ Add</button>
 
-<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+<p role="status">Current count 2: @currentCount2</p>
+<button class="btn btn-primary" @onclick="DecrementCount2">- Minus</button>
+<button class="btn btn-primary" @onclick="IncrementCount2">+ Add</button>
+
+
+<p role="status">Current count 3: @currentCount3</p>
+<button class="btn btn-primary" @onclick="Multiply">Multiply C1xC2</button>
+<button class="btn btn-primary" @onclick="Reset">Reset</button>
+<button class="btn btn-primary" @onclick="Double">Double</button>
 
 @code {
     private int currentCount = 0;
+    private int currentCount2 = 0;
+    private int currentCount3 = 0;
 
-    private void IncrementCount()
+    private void IncrementCount1()
     {
         currentCount++;
+    }
+    private void DecrementCount1()
+    {
+        currentCount--;
+    }
+    private void IncrementCount2()
+    {
+        currentCount2++;
+    }
+    private void DecrementCount2()
+    {
+        currentCount2--;
+    }
+    private void Multiply()
+    {
+        currentCount3 = currentCount * currentCount2;
+    }
+    private void Reset()
+    {
+        currentCount3 = 0;
+    }
+    private void Double()
+    {
+        currentCount3 *= 2;
     }
 }

@@ -40,7 +40,7 @@ else
                     <td>@bike.name </td>
                     <td>@bike.address </td>
                     <td>@bike.banking </td>
-                    <td input type="checkbox" name="bonus" > </td>
+                    <td>@bike.bonus </td>
                     <td>@bike.bike_stands </td>
                     <td>@bike.available_bike_stands </td>
                     <td>@bike.available_bikes </td>
@@ -71,6 +71,9 @@ else
         // Simulate asynchronous loading to demonstrate streaming rendering
         await Task.Delay(500);
 
+        var startDate = DateOnly.FromDateTime(DateTime.Now);
+        var addres = new[] { "Smithfield ", "Parnell ", "Clonmel ", "Avondale ", "James ", "Mount ", "Christchurch ", "Grantham ", "Pearse ", "York ", "Fitzwilliam ", "Excise " };
+        var route = new[] { "Road", "Street", "Row", "House" };
         var summa = new[] {"North", "West","Est","Sudi","Sunny","Sony","Cloudy","Hot","Gouspy","Seibel","Difac","Gross","Fabre","Caze"};
         var summaries = new[] { "Paul","Ryan", "Jon", "Sylvain", "Mathis", "Karl", "Roxane", "Julie", "Elodie", "Marie", "Jack","Jimmy","Kyllian" };
         var op = new[] { "OPEN", "CLOSE" };
@@ -79,14 +82,14 @@ else
                 number = Random.Shared.Next(0, 155),
                 contract_name = "dublin",
                 name = summaries[Random.Shared.Next(summaries.Length)]+" "+summa[Random.Shared.Next(summa.Length)],
-                address = "",
+                address = addres[Random.Shared.Next(addres.Length)] + " " + route[Random.Shared.Next(route.Length)],
                 banking = Random.Shared.Next(0,2)==0,
                 bonus = Random.Shared.Next(0, 2) == 0,
                 bike_stands = Random.Shared.Next(0, 50),
                 available_bike_stands = Random.Shared.Next(0, 30),
                 available_bikes = Random.Shared.Next(0, 30),
                 status =op[ Random.Shared.Next(op.Length)],
-                last_update = Random.Shared.Next(100000000, 179000000),
+                last_update = startDate.AddDays(index),
                 //Summary = summaries[Random.Shared.Next(summaries.Length)]
             }).ToArray();
     }
@@ -105,7 +108,7 @@ else
         public int available_bike_stands { get; set; }
         public int available_bikes { get; set; }
         public string status { get; set; }
-        public long last_update { get; set; }
+        public DateOnly last_update { get; set; }
     }
 
 
